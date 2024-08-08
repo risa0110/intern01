@@ -11,7 +11,8 @@ from web.profile.routes import PROFILE_BP
 from web.simulation.routes import SIMULATION_BP
 from web.update.routes import UPDATE_BP
 
-APP_BP = Blueprint("app", __name__)
+# APP_BP = Blueprint("app", __name__)
+APP_BP = Blueprint("app", __name__, template_folder="simulation/templates")
 
 # ログイン用のエンドポイントを追加する
 APP_BP.register_blueprint(AUTH_BP)
@@ -30,7 +31,25 @@ def index():
     # ログ出力の方法
     logging.debug("トップページにアクセスされました")
     # return render_template("index.html")
-    return redirect(url_for("app.simulation.simulation"))
+    # return redirect(url_for("app.simulation.simulation"))
+    is_authenticated = current_user.is_authenticated
+    if is_authenticated:
+        init_data = {
+            "current_point": current_user.current_point,
+            "monthly_point": current_user.monthly_point,
+            "goal_point": current_user.goal_point,
+        }
+    else:
+        init_data = {
+            "current_point": 0,
+            "monthly_point": 0,
+            "goal_point": 0,
+        }
+    return render_template(
+        "simulation.html",
+        init_data=init_data,
+        is_authenticated=is_authenticated,
+    ), 409
 
 
 @APP_BP.route("/secret")
