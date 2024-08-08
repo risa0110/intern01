@@ -8,7 +8,8 @@ from web.api.routes import API_BP
 from web.auth.routes import AUTH_BP
 from web.com_list.routes import COMLIST_BP
 from web.profile.routes import PROFILE_BP
-from web.simulation.routes import SIMULATION_BP
+
+# from web.simulation.routes import SIMULATION_BP
 from web.update.routes import UPDATE_BP
 
 APP_BP = Blueprint("app", __name__)
@@ -20,7 +21,7 @@ APP_BP.register_blueprint(AUTH_BP)
 APP_BP.register_blueprint(ADMIN_BP)
 APP_BP.register_blueprint(PROFILE_BP)
 APP_BP.register_blueprint(UPDATE_BP)
-APP_BP.register_blueprint(SIMULATION_BP)
+# APP_BP.register_blueprint(SIMULATION_BP)
 
 APP_BP.register_blueprint(COMLIST_BP)
 APP_BP.register_blueprint(API_BP)
