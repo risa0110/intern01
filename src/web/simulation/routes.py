@@ -1,0 +1,23 @@
+from flask import Blueprint, render_template
+from flask_login import current_user
+
+SIMULATION_BP = Blueprint(
+    "simulation", __name__, url_prefix="/simulation", template_folder="templates"
+)
+
+
+@SIMULATION_BP.route("/", methods=["GET"])
+def simulation():
+    if current_user.is_authenticated:
+        init_data = {
+            "current_point": current_user.current_point,
+            "monthly_point": current_user.monthly_point,
+            "goal_point": current_user.goal_point,
+        }
+    else:
+        init_data = {
+            "current_point": 0,
+            "monthly_point": 0,
+            "goal_point": 0,
+        }
+    return render_template("simulation.html", init_data=init_data), 409

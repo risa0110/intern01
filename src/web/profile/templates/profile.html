@@ -1,0 +1,64 @@
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ユーザー情報</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    table {
+      width: 50%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+
+    td,
+    th {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f2f2f2;
+      width: 30%;
+      /* 項目名の列の幅を調整 */
+    }
+
+    td {
+      width: 70%;
+      /* データの列の幅を調整 */
+    }
+
+    h1 {
+      color: #333;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>ユーザー情報</h1>
+  <table>
+    <tbody>
+      <tr>
+        <th>ユーザー名</th>
+        <td>{{ user.username }}</td>
+      </tr>
+      <tr>
+        <th>現在のポイント</th>
+        <td>{{ user.current_point }}</td>
+      </tr>
+      <tr>
+        <th>月々のポイント</th>
+        <td>{{ user.monthly_point }}</td>
+      </tr>
+      <tr>
+        <th>目標のポイント</th>
+        <td>{{ user.goal_point }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <a href="{{ url_for('app.update.update') }}" class="button">編集</a>
+</body>

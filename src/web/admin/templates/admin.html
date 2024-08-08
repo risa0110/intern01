@@ -1,0 +1,33 @@
+<body>
+  <h1>ユーザデータ</h1>
+  <table class="table table-striped mt-4">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Username</th>
+        <th scope="col">Current Point</th>
+        <th scope="col">Monthly Point</th>
+        <th scope="col">Goal Point</th>
+        <th scope="col">Admin</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for user in data %}
+        <tr>
+          <td>{{ user.id }}</td>
+          <td>{{ user.username }}</td>
+          <td>{{ user.current_point }}</td>
+          <td>{{ user.monthly_point }}</td>
+          <td>{{ user.goal_point }}</td>
+          <td>{{ user.is_admin }}</td>
+          <td>
+            <form action="{{ url_for('app.admin.delete', user_id=user.id) }}" method="post" style="display:inline;">
+              <button type="submit">Delete</button>
+            </form>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</body>
