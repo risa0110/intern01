@@ -1,0 +1,38 @@
+{
+  "name": "商品リスト",
+  "content": [
+    {
+      "id": 0,
+      "name": "aa",
+      "points": 400
+    }, {
+      "id": 1,
+      "name": "bb",
+      "points": 10
+    }, {
+      "id": 2,
+      "name": "cc",
+      "points": 24
+    }, {
+      "id": 3,
+      "name": "dd",
+      "points": 55
+    }, {
+      "id": 4,
+      "name": "ee",
+      "points": 83
+    }, {
+      "id": 5,
+      "name": "ff",
+      "points": 64
+    }, {
+      "id": 6,
+      "name": "gg",
+      "points": 15
+    }, {
+      "id": 7,
+      "name": "hh",
+      "points": 45
+    }
+  ]
+}

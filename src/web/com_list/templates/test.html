@@ -1,0 +1,85 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+  テストページ
+{% endblock %}
+
+
+{% block content %}
+
+  <header>
+    <nav class="d-none d-lg-block d-xl-block">
+      <div class="container-fluid d-flex justify-content-between">
+        <h1 class="font-title">@niftyポイントマスター(仮)</h1>
+        <div class="login d-flex">
+          <img class="account_icon" src="{{url_for('static', filename = 'human_icon.png') }}">
+          <p>アカウント</p>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <hr class="line">
+  <div class="container-fluid d-flex justify-content-start mt-3">
+    <p class="fp">ポイント：</p>
+    <input type="text" class="mx-3"></input>
+    <!--ポイント数インプット欄下限-->
+    <p class="fw-bold fs-3">～</p>
+    <input type="text" class="mx-3"></input>
+    <!--ポイント数インプット欄上限-->
+  </div>
+  <div class="products">
+    <div class="row">
+      {% for product in products %}
+        <div class="col-12 col-md-3 list">
+          <a href="">
+            <img src="https://placehold.jp/243x207.png" alt="">
+          </a>
+          <h4>{{ product.name }}</h4>
+          <h4>{{ product.points }}pt</h4>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="container">
+    <h1>Product List</h1>
+    <form method="get" action="/products">
+      <div>
+        <label for="name">Filter by:</label>
+        <input type="text" name="name" id="name" placeholder="Field name" value="{{ request.args.get('name', 'points') }}">
+      </div>
+      <div>
+        <label for="min">Min value:</label>
+        <input type="text" name="min" id="min" placeholder="Min value" value="{{ request.args.get('min', '') }}">
+      </div>
+      <div>
+        <label for="max">Max value:</label>
+        <input type="text" name="max" id="max" placeholder="Max value" value="{{ request.args.get('max', '') }}">
+      </div>
+      <button type="submit">Filter</button>
+    </form>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <div class="flash-message">
+        {% for message in messages %}
+          <p>{{ message }}</p>
+        {% endfor %}
+      </div>
+    {% endif %}
+    {% endwith %}
+    {% for product in products %}
+      <div class="product">
+        <div>
+          <h2>{{ product.name }}</h2>
+          <p>ID:
+            {{ product.id }}</p>
+        </div>
+        <div>
+          <p>Points:
+            {{ product.points }}</p>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}

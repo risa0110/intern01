@@ -1,0 +1,36 @@
+@charset "UTF-8";
+
+body{
+    padding: 0;
+    margin: 0;
+}
+p{
+    font-family: "M PLUS 1p";
+}
+.header{
+    margin: 0 30px;
+}
+.header h1{
+    font-family: "Dela Gothic One";
+}
+.login_icon{
+    max-width: 56px;
+    max-height: 42px;
+}
+.main-container{
+    padding: 10px 50px 0;
+}
+.fp{
+    font-size: 20px;
+}
+.d-flex h4{
+    text-align: center;
+    color: #F00;
+    font-size: 48px;
+}
+.d-flex img{
+    margin-left: 3px;
+}
+#point_count .fp{
+    height: 6px;
+}

@@ -1,64 +1,66 @@
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ユーザー情報</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 20px;
-    }
+{% extends 'layout.html' %}
 
-    table {
-      width: 50%;
-      border-collapse: collapse;
-      margin-bottom: 20px;
-    }
+{% block content %}
 
-    td,
-    th {
-      border: 1px solid #ddd;
-      padding: 8px;
-      text-align: left;
-    }
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    th {
-      background-color: #f2f2f2;
-      width: 30%;
-      /* 項目名の列の幅を調整 */
-    }
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}">
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
 
-    td {
-      width: 70%;
-      /* データの列の幅を調整 */
-    }
+  <div class="header">
+    <nav class="d-none d-lg-block d-xl-block mt-4">
+      <div class="container-fluid d-flex justify-content-between" id="navi">
+        <h1 class="font-title">@niftyポイントマスター(仮)</h1>
+        <div class="login d-flex">
+          <img src="/static/人物のアイコン素材 その3.png" class="login_icon">
+          <p>アカウント</p>
+        </div>
+      </div>
+    </nav>
+  </div>
 
-    h1 {
-      color: #333;
-    }
-  </style>
-</head>
+  <body>
 
-<body>
-  <h1>ユーザー情報</h1>
-  <table>
-    <tbody>
-      <tr>
-        <th>ユーザー名</th>
-        <td>{{ user.username }}</td>
-      </tr>
-      <tr>
-        <th>現在のポイント</th>
-        <td>{{ user.current_point }}</td>
-      </tr>
-      <tr>
-        <th>月々のポイント</th>
-        <td>{{ user.monthly_point }}</td>
-      </tr>
-      <tr>
-        <th>目標のポイント</th>
-        <td>{{ user.goal_point }}</td>
-      </tr>
-    </tbody>
-  </table>
-  <a href="{{ url_for('app.update.update') }}" class="button">編集</a>
+    <!-- // v0 by Vercel. // https://v0.dev/t/5pMzQaZhiek -->
+
+    <div class="flex flex-col items-center justify-center min-h-screen bg-gray-200">
+      <div class="bg-gray-100 p-8 rounded-lg shadow-md w-full max-w-2xl">
+        <h2 class="text-4xl font-bold mb-6">登録情報</h2>
+        <div class="flex justify-between mb-4">
+          <span class="text-xl">ユーザー名 :</span>
+          <span class="text-xl">{{ user.username }}</span>
+        </div>
+        <div class="flex justify-between mb-4">
+          <span class="text-xl">現在のポイント数 :</span>
+          <div class="flex items-center">
+            <span class="text-3xl font-bold">{{ user.current_point }}</span>
+            <span class="ml-2">pt</span>
+          </div>
+        </div>
+        <div class="flex justify-between mb-4">
+          <span class="text-xl">毎月のポイント数 :</span>
+          <div class="flex items-center">
+            <span class="text-3xl font-bold">{{ user.monthly_point }}</span>
+            <span class="ml-2">pt</span>
+          </div>
+        </div>
+        <div class="flex justify-between mb-6">
+          <span class="text-xl">目標ポイント数 :</span>
+          <div class="flex items-center">
+            <span class="text-3xl font-bold text-red-500">{{ user.goal_point }}</span>
+            <span class="ml-2">pt</span>
+          </div>
+        </div>
+        <a href="{{ url_for('app.update.update') }}" class="bg-orange-400 text-white py-2 px-4 rounded-lg">編集</a>
+
+      </div>
+    </div>
+
+  </div>
+</div>
 </body>
+
+{% endblock %}

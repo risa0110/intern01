@@ -11,12 +11,12 @@
   <body>
     <div class="container">
       <h1 class="mt-5">プロフィールの更新</h1>
+      <h2 class="mt-5">
+        ユーザー名
+        {{ username }}
+      </h2>
       <form method="POST" action="{{ url_for('app.update.update') }}">
         {{ form.hidden_tag() }}
-        <div class="form-group">
-          <label for="username">ユーザー名</label>
-          {{ form.username(class="form-control", id="username") }}
-        </div>
         <div class="form-group">
           <label for="current_point">現在のポイント</label>
           {{ form.current_point(class="form-control", id="current_point") }}
@@ -31,6 +31,7 @@
         </div>
         <button type="submit" class="btn btn-primary">更新</button>
       </form>
+      <a href="{{ url_for('app.profile.profile') }}" class="btn btn-primary">キャンセル</a>
     </div>
     <script src="{{ url_for('static', filename='bootstrap.min.js') }}"></script>
   </body>

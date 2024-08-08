@@ -1,11 +1,16 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField
-from wtforms.validators import DataRequired
+from wtforms import IntegerField, SubmitField
+from wtforms.validators import DataRequired, NumberRange
 
 
 class UpdateProfileForm(FlaskForm):
-    username = StringField("Username", validators=[DataRequired()])
-    current_point = StringField("Current Point", validators=[DataRequired()])
-    monthly_point = StringField("Monthly Point", validators=[DataRequired()])
-    goal_point = StringField("Goal Point", validators=[DataRequired()])
+    current_point = IntegerField(
+        "Current Point", validators=[DataRequired(), NumberRange(min=0)]
+    )
+    monthly_point = IntegerField(
+        "Monthly Point", validators=[DataRequired(), NumberRange(min=0)]
+    )
+    goal_point = IntegerField(
+        "Goal Point", validators=[DataRequired(), NumberRange(min=0)]
+    )
     submit = SubmitField("更新")

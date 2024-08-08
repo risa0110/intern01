@@ -1,5 +1,5 @@
 from flask import Blueprint, flash, redirect, render_template, request, url_for
-from flask_login import login_user, logout_user
+from flask_login import current_user, login_user, logout_user
 from sqlalchemy.exc import IntegrityError
 from werkzeug.security import check_password_hash, generate_password_hash
 
@@ -30,6 +30,9 @@ def signup():
 
 @AUTH_BP.route("/login", methods=["GET", "POST"])
 def login():
+    if current_user.is_authenticated:
+        return redirect(url_for("app.index"))
+
     form = LoginForm()
     if not form.validate_on_submit():
         return render_template("login.html", form=form)
@@ -49,4 +52,4 @@ def login():
 @AUTH_BP.route("/logout", methods=["GET"])
 def logout():
     logout_user()
-    return redirect(url_for("app.index"))
+    return redirect(url_for("app.simulation.simulation"))

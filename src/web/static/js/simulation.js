@@ -12,6 +12,11 @@ const updateBarChart = () => {
     const currentPoint = currentPointInput.value;
     const monthlyPoint = monthlyGetPointInput.value;
 
+    // 頭文字が0の場合は処理を終了
+    if ((currentPoint.startsWith('0') || monthlyPoint.startsWith('0') || currentPoint.startsWith('-') || monthlyPoint.startsWith('-')) && ( Number(currentPoint) !== 0 || Number(monthlyPoint) !== 0)) {
+        return;
+    }
+
     myLineChart.data.datasets[0].data = [0, 0, 0, 0, 0].map((val, idx) => {
         let updateVal = 0;
         switch (idx) {
@@ -38,10 +43,37 @@ const updateBarChart = () => {
 
 const updateLineChart = () => { 
     const goalPoint = goalPointInput.value;
+    // 頭文字が0の場合は処理を終了
+    if ((goalPoint.startsWith('0') || goalPoint.startsWith('-')) && Number(goalPoint) !== 0) {
+        return;
+    }
     myLineChart.options.annotation.annotations[0].value  =  Number(goalPoint);
     myLineChart.options.annotation.annotations[0].endValue  =  Number(goalPoint);
     myLineChart.update()
 }
+
+const updateLink = () => {
+    // 入力された目標ポイント数を取得
+    const goalPoint = document.getElementById('goal-point').value;
+    // リンクのhrefを更新
+    const link = document.getElementById('exchange-link');
+
+    // 現在のオリジン（プロトコル + ホスト + ポート）を取得
+    const currentOrigin = window.location.origin;
+
+    // オリジンに基づいてリンクを設定
+    if (currentOrigin.includes("localhost:18347")) {
+        link.href = "/com_list/" + "?max_points=" + encodeURIComponent(goalPoint);
+    } else {
+        link.href = "/team4/com_list/" + "?max_points=" + encodeURIComponent(goalPoint);
+    }
+}
+
+// ページが読み込まれた時と、入力値が変更された時にupdateLink関数を呼び出す
+window.onload = function() {
+    updateLink();
+    document.getElementById('goal-point').addEventListener('input', updateLink);
+};
 
 // 月の取得
 const today = new Date()
@@ -99,7 +131,7 @@ let myLineChart = new Chart(ctx, {
             yAxes: [{
             id: 'goal',
             ticks: {
-            suggestedMax: 5000,
+            suggestedMax: 10,
             suggestedMin: 0,
             callback: function(value, index, values){
                 return  value +  ''
@@ -147,6 +179,8 @@ updateLineChart();
 
 // inputタグの値が変更されたときに値を表示
 currentPointInput.addEventListener("input", () => {
+
+
     updateBarChart();
 
 })

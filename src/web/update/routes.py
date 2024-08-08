@@ -1,7 +1,6 @@
 from flask import Blueprint, flash, redirect, render_template, request, url_for
 from flask_login import current_user, login_required
 
-from ..auth.models import User
 from ..models import DB
 from .form import UpdateProfileForm
 
@@ -16,17 +15,17 @@ def update():
     form = UpdateProfileForm()
     user = current_user
 
-    if form.validate_on_submit():
-        User.username = form.username.data
+    if request.method == "POST":
+        # なんかうまくいかない
+        # if form.validate_on_submit():
+        #     pass
         user.current_point = form.current_point.data
         user.monthly_point = form.monthly_point.data
         user.goal_point = form.goal_point.data
         DB.session.commit()
-        flash("ユーザー情報が更新されました")
         return redirect(url_for("app.profile.profile"))  # 修正されたエンドポイント名
     elif request.method == "GET":
-        form.username.data = user.username
         form.current_point.data = user.current_point
         form.monthly_point.data = user.monthly_point
         form.goal_point.data = user.goal_point
-    return render_template("update.html", form=form, user=user)
+    return render_template("update.html", form=form, username=user.username)
