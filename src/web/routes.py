@@ -11,8 +11,8 @@ from web.profile.routes import PROFILE_BP
 from web.simulation.routes import SIMULATION_BP
 from web.update.routes import UPDATE_BP
 
-# APP_BP = Blueprint("app", __name__)
-APP_BP = Blueprint("app", __name__, template_folder="simulation/templates")
+APP_BP = Blueprint("app", __name__)
+# APP_BP = Blueprint("app", __name__, template_folder="simulation/templates")
 
 # ログイン用のエンドポイントを追加する
 APP_BP.register_blueprint(AUTH_BP)
@@ -49,7 +49,7 @@ def index():
         "simulation.html",
         init_data=init_data,
         is_authenticated=is_authenticated,
-    ), 409
+    )
 
 
 @APP_BP.route("/secret")
