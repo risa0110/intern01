@@ -29,6 +29,7 @@ def com_list():
 
     elif request.method == "GET":
         max_points_query = request.args.get("max_points")
+        max_points = max_points_query
         max_points_tmp = (
             int(max_points_query) if max_points_query else products_max_point
         )
