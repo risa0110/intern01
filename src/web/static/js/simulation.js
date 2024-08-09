@@ -162,7 +162,7 @@ let myLineChart = new Chart(ctx, {
                     cornerRadius: 3,
                     position: 'center',
                     xAdjust: 50,
-                    yAdjust: 0,
+                    yAdjust: -10,
                     enabled: true,
                     content: '目標ポイント'
                 }
