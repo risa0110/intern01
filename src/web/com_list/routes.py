@@ -1,22 +1,10 @@
-import json
-import os
-
 from flask import (
     Blueprint,
-    current_app,
-    flash,
-    jsonify,
-    redirect,
     render_template,
     request,
-    url_for,
 )
-from flask_login import login_user, logout_user
-from sqlalchemy.exc import IntegrityError
-from werkzeug.security import check_password_hash, generate_password_hash
+from flask_login import current_user
 
-from ..models import DB
-from .forms import LoginForm, SignupForm
 from .util import filter_products_by_int, get_json_data, sort_products
 
 COMLIST_BP = Blueprint(
@@ -50,5 +38,9 @@ def com_list():
     products = sort_products(products)
 
     return render_template(
-        "product.html", products=products, min_points=min_points, max_points=max_points
+        "product.html",
+        products=products,
+        min_points=min_points,
+        max_points=max_points,
+        is_authenticated=current_user.is_authenticated,
     )
