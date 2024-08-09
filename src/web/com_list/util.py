@@ -29,3 +29,7 @@ def filter_products_by_int(products, name: str, min: int, max: int):
                 f"Product '{product}' has a non-integer value for '{name}'"
             )
     return filtered_products
+
+
+def sort_products(products):
+    return sorted(products, key=lambda x: x["points"])

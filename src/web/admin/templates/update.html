@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="ja">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ユーザー情報更新</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  </head>
+
+  <body>
+    <div class="container mt-4">
+      <h1 class="mb-4">ユーザー情報更新</h1>
+
+      <!-- ユーザー情報更新フォーム -->
+      <form method="post">
+        {{ form.hidden_tag() }}
+
+        <div class="form-group">
+          <label for="user_id">ユーザーID</label>
+          {{ form.user_id(class="form-control") }}
+        </div>
+
+        <div class="form-group">
+          <label for="username">ユーザー名</label>
+          {{ form.username(class="form-control") }}
+        </div>
+
+        <div class="form-group">
+          <label for="password">パスワード</label>
+          {{ form.password(class="form-control", placeholder="新しいパスワードを入力") }}
+        </div>
+
+        <div class="form-group">
+          <label for="current_point">現在のポイント</label>
+          {{ form.current_point(class="form-control") }}
+        </div>
+
+        <div class="form-group">
+          <label for="monthly_point">毎月の獲得ポイント</label>
+          {{ form.monthly_point(class="form-control") }}
+        </div>
+
+        <div class="form-group">
+          <label for="goal_point">目標ポイント</label>
+          {{ form.goal_point(class="form-control") }}
+        </div>
+
+        <div class="form-check">
+          {{ form.is_admin() }}
+          <label class="form-check-label" for="is_admin">管理者権限を与える場合はチェック</label>
+        </div>
+
+        <button type="submit" class="btn btn-primary mt-4">更新</button>
+        <a href="{{ url_for('app.admin.admin') }}" class="btn btn-secondary mt-4">戻る</a>
+      </form>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </body>
+
+</html>
