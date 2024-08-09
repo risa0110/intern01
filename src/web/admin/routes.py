@@ -70,7 +70,7 @@ def update():
             form.monthly_point.data = user.monthly_point
             form.goal_point.data = user.goal_point
             form.is_admin.data = user.is_admin
-            return render_template("update.html", form=form)
+            return render_template("admin_update.html", form=form)
         return redirect(url_for("app.admin.admin"))
 
 

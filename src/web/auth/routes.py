@@ -52,4 +52,4 @@ def login():
 @AUTH_BP.route("/logout", methods=["GET"])
 def logout():
     logout_user()
-    return redirect(url_for("app.simulation.simulation"))
+    return redirect(url_for("app.index"))
