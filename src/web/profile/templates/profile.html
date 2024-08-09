@@ -13,7 +13,9 @@
   <div class="header">
     <nav class="d-none d-lg-block d-xl-block mt-4">
       <div class="container-fluid d-flex justify-content-between" id="navi">
-        <h1 class="font-title">@niftyポイントマスター</h1>
+        <a href="{{ url_for('app.index') }}">
+          <h1 class="font-title">@niftyポイントマスター</h1>
+        </a>
         <div class="login d-flex">
           <img src="/static/image/人物のアイコン素材 その3.png" class="login_icon">
           <p>アカウント</p>

@@ -27,6 +27,10 @@ p{
     font-family: "Dela Gothic One";
     font-size: 50px;
 }
+.header a{
+    color: inherit; /* テキストの色を継承 */
+    text-decoration: none; /* 下線を除去 */
+}
 .login_icon{
     max-width: 56px;
     max-height: 42px;
