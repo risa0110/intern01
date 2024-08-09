@@ -1,9 +1,18 @@
 {% extends 'layout.html' %}
 
 {% block content %}
-
-  <div class="border-b-2 pb-3">
-    <h1 class="font-black text-3xl">@niftyポイントマスター(仮)</h1>
+  <div class="header">
+    <nav class="d-none d-lg-block d-xl-block mt-4">
+      <div class="container-fluid d-flex justify-content-between" id="navi">
+        <h1 class="font-title">@niftyポイントマスター(仮)</h1>
+        <div class="login">
+          <a href="" class="d-flex">
+            <img src="{{ url_for('static', filename='image/人物のアイコン素材 その3.png') }}" class="login_icon">
+            <p>アカウント</p>
+          </a>
+        </div>
+      </div>
+    </nav>
   </div>
   {% if not is_authenticated %}
     <a href="{{ url_for('app.auth.login') }}">Login</a>

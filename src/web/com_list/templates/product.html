@@ -8,47 +8,75 @@
   <div class="header">
     <nav class="d-none d-lg-block d-xl-block mt-4">
       <div class="container-fluid d-flex justify-content-between" id="navi">
-        <h1 class="font-title">@niftyポイントマスター(仮)</h1>
-        <div class="login">
-          <a href="" class="d-flex">
-            <img src="{{ url_for('static', filename='image/人物のアイコン素材 その3.png') }}" class="login_icon">
-            <p>アカウント</p>
-          </a>
+        <h1 class="font-title">@niftyポイントマスター</h1>
+        <ul class="accordion-area">
+          <li>
+            <section>
+              <div class="login d-flex">
+                <img src="/static/image/人物のアイコン素材 その3.png" class="login_icon">
+                <p>アカウント</p>
+              </div>
+              <div class="box">
+                <div class="mx-3 my-4">
+                  <h5 class="text-center">こんにちは</h5>
+                  <div class="login-btn">
+                    {% if not is_authenticated %}
+                      <div class="buttons">
+                        <div class="guest">ゲスト様</div>
+                        <form action="{{ url_for('app.auth.login') }}" method="get">
+                          <button class="buttonss" type="submit">ログイン</button>
+                        </form>
+                        <form action="{{ url_for('app.auth.signup') }}" method="get">
+                          <button class="buttonss" type="submit">新規登録</button>
+                        </form>
+                      </div>
+                    {% endif %}
+                    {% if is_authenticated %}
+                      <div class="buttons">
+                        <div class="text-center">{{username}}様</div>
+                        <form class="text-center" action="{{ url_for('app.auth.logout') }}" method="get">
+                          <button type="submit" class="buttonss">Logout</button>
+                        </form>
+                      </div>
+                    {% endif %}
+                  </div>
+                </div>
+              </section>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+
+    <hr class="line">
+    <div class="main-container">
+      <div class="container-fluid d-flex justify-content-start mt-3" id="point_count">
+        <form action="{{ url_for('app.comlist.com_list') }}" method="post" class="d-flex">
+
+          <p class="fp">ポイント：</p>
+          <input type="number" class="mx-3 text-box" name="min_points" min="0" {% if min_points != None %} value="{{ min_points }}" {% endif %}></input>
+          <!--ポイント数インプット欄下限-->
+          <p class="fw-bold">～</p>
+          <input type="number" class="mx-3 text-box" name="max_points" min="0" {% if max_points != None %} value="{{ max_points }}" {% endif %}></input>
+          <!--ポイント数インプット欄上限-->
+          <button type="submit" class="btn btn-primary mx-3">適用</button>
+          <!-- 提出ボタン -->
+        </form>
+      </div>
+      <div class="product mt-5">
+        <!--商品一覧リスト-->
+        <div class="d-flex flex-wrap">
+          {% for product in products %}
+            <div class="col-3">
+              <a href="">
+                <img src="https://placehold.jp/280x245.png" alt="">
+              </a>
+              <h4>{{ product.name }}</h4>
+              <h4>{{ product.points }}pt</h4>
+            </div>
+          {% endfor %}
         </div>
       </div>
-    </nav>
-  </div>
-
-  <hr class="line">
-  <div class="main-container">
-    <div class="container-fluid d-flex justify-content-start mt-3 filter-container" id="point_count">
-      <form action="{{ url_for('app.comlist.com_list') }}" method="post" class="d-flex filter-form">
-
-        <p class="">ポイント：</p>
-        <input type="number" class="text-box filter-input" name="min_points" min="0" {% if min_points != None %} value="{{ min_points }}" {% endif %}></input>
-        <!--ポイント数インプット欄下限-->
-        <p class="filter-tilde">〜</p>
-        <input type="number" class="text-box filter-input" name="max_points" min="0" {% if max_points != None %} value="{{ max_points }}" {% endif %}></input>
-        <!--ポイント数インプット欄上限-->
-        <p class="filter-pt">pt</p>
-        <button type="submit" class="filter-button">適用</button>
-        <!-- 提出ボタン -->
-      </form>
     </div>
-    <div class="product mt-5">
-      <!--商品一覧リスト-->
-      <div class="d-flex flex-wrap">
-        {% for product in products %}
-          <div class="col-3 one_product">
-            <a href="">
-              <img class="product-img" src="{{url_for('static', filename=product.img)}}" alt="">
-            </a>
-            <h4 class="product-name">{{ product.name }}</h4>
-            <h4 class="product-point">{{ product.points }}pt</h4>
-          </div>
-        {% endfor %}
-      </div>
-    </div>
-  </div>
 
-{% endblock %}
+  {% endblock %}
