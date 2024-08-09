@@ -7,6 +7,19 @@ body{
 p{
     font-family: "M PLUS 1p";
 }
+.login a{
+    text-decoration: none;
+}
+.login a:hover{
+    opacity: 0.7;
+}
+.login_icon{
+    margin: 3px 10px 0 0;
+}
+.login p{
+    font-weight: 400;
+}
+
 .header{
     margin: 0 30px;
 }
@@ -20,17 +33,127 @@ p{
 .main-container{
     padding: 10px 50px 0;
 }
-.fp{
+.main-container *{
+    font-family: "M PLUS 1p";
+}
+.main-container p{
     font-size: 20px;
+}
+.fp{
+    margin-top: 10px;
+    font-weight: bolder;
+}
+.text-box{
+    width: 200px;
+    height: 50px;
 }
 .d-flex h4{
     text-align: center;
-    color: #F00;
+    /* color: #F00; */
     font-size: 48px;
 }
 .d-flex img{
     margin-left: 3px;
+    width: 280px;
+    height: 245px;
 }
 #point_count .fp{
     height: 6px;
 }
+
+.product .d-flex.flex-wrap {
+  row-gap: 30px; /* 行間と列間の隙間を設定 */
+}
+
+.one_product{
+  display: flex;
+  flex-flow: column;
+  row-gap: 5px;
+  align-items: center;
+}
+
+.product-name {
+    color: black;
+
+}
+
+.product-point {
+    color: red;
+}
+
+.product-img{
+    background-color: #D9D9D9;
+}
+
+.filter-container *{
+    font-size: 32px;
+}
+
+.filter-container p{
+    font-size: 32px;
+    display: inline-block;
+
+    margin: auto 0px;  
+}
+
+.filter-container .filter-tilde{
+    margin: auto 20px;
+}
+.filter-container .filter-pt{
+    margin: auto 0 0 10px;
+}
+
+
+.filter-input {
+    margin: auto 0;
+    padding: 10px;
+    height: 50px;
+    border-radius: 10px;
+    border: 1px solid #A8A8A8;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* スムーズなトランジション */
+}
+
+/* 入力フォームフォーカス時のスタイル */
+.filter-input:focus {
+    border-color: #007BFF; /* フォーカス時にボーダーの色を変更 */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* フォーカス時にボックスシャドウを追加 */
+    outline: none; /* デフォルトのアウトラインを削除 */
+}
+
+/* 入力フォームホバー時のスタイル */
+.filter-input:hover {
+    border-color: #555; /* ホバー時にボーダーの色を変更 */
+    transform: scale(1.05); /* 少し大きくする */
+}
+
+.filter-button{
+    background-color: #A8A8A8;
+    color: black;
+    margin-left: 37px;
+    padding: 5px 33px;
+    font-size: 24px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer; /* カーソルをポインターに変更 */
+    transition: background-color 0.3s ease, transform 0.1s ease; /* スムーズなトランジション */
+}
+
+/* ホバー時のスタイル */
+.filter-button:hover {
+    background-color: #8a8a8a; /* 色を変更 */
+    transform: scale(1.05); /* 少し大きくする */
+}
+
+/* フォーカス時のスタイル */
+.filter-button:focus {
+    outline: none; /* デフォルトのフォーカスアウトラインを削除 */
+    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.2); /* カスタムフォーカスアウトラインを追加 */
+}
+
+/* アクティブ（クリック）時のスタイル */
+.filter-button:active {
+    background-color: #6a6a6a; /* 色を変更 */
+    transform: scale(0.95); /* 少し小さくする */
+}
+
+

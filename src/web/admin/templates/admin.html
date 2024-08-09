@@ -1,33 +1,117 @@
-<body>
-  <h1>ユーザデータ</h1>
-  <table class="table table-striped mt-4">
-    <thead>
-      <tr>
-        <th scope="col">ID</th>
-        <th scope="col">Username</th>
-        <th scope="col">Current Point</th>
-        <th scope="col">Monthly Point</th>
-        <th scope="col">Goal Point</th>
-        <th scope="col">Admin</th>
-        <th scope="col">Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for user in data %}
-        <tr>
-          <td>{{ user.id }}</td>
-          <td>{{ user.username }}</td>
-          <td>{{ user.current_point }}</td>
-          <td>{{ user.monthly_point }}</td>
-          <td>{{ user.goal_point }}</td>
-          <td>{{ user.is_admin }}</td>
-          <td>
-            <form action="{{ url_for('app.admin.delete', user_id=user.id) }}" method="post" style="display:inline;">
-              <button type="submit">Delete</button>
-            </form>
-          </td>
-        </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-</body>
+<!doctype html>
+<html lang="ja">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ユーザー情報一覧</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+      .table td,
+      .table th {
+        line-hight: 1.5;
+      }
+
+      .alert {
+        margin-bottom: 1.5rem;
+        /* アラートメッセージの下部にスペースを追加 */
+      }
+
+      .alert-success {
+        background-color: #d4edda;
+        /* 成功メッセージの背景色 */
+        color: #155724;
+        /* 成功メッセージのテキスト色 */
+      }
+
+      .alert-info {
+        background-color: #d1ecf1;
+        /* 情報メッセージの背景色 */
+        color: #0c5460;
+        /* 情報メッセージのテキスト色 */
+      }
+
+      .alert-warning {
+        background-color: #fff3cd;
+        /* 警告メッセージの背景色 */
+        color: #856404;
+        /* 警告メッセージのテキスト色 */
+      }
+
+      .alert-danger {
+        background-color: #f8d7da;
+        /* エラーメッセージの背景色 */
+        color: #721c24;
+        /* エラーメッセージのテキスト色 */
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container mt-4 page-content">
+      <h1 class="mb-4">ユーザー情報一覧</h1>
+
+      <!-- フラッシュメッセージ -->
+      {% with messages = get_flashed_messages(with_categories = True) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="alert alert-{{ category }} alert-dismissible fade show {{ category }}" role="alert">
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        {% endfor %}
+      {% endif %}
+      {% endwith %}
+
+      <!-- ユーザー情報テーブル -->
+      <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <th>ID</th>
+            <th>Username</th>
+            <th>Current Point</th>
+            <th>Monthly Point</th>
+            <th>Goal Point</th>
+            <th>Admin</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for user in users %}
+            <tr>
+              <td>{{ user.id }}</td>
+              <td>{{ user.username }}</td>
+              <td>{{ user.current_point }}</td>
+              <td>{{ user.monthly_point }}</td>
+              <td>{{ user.goal_point }}</td>
+              <td>
+                {% if user.is_admin %}
+                  <span class="badge badge-success">Yes</span>
+                {% else %}
+                  <span class="badge badge-secondary">No</span>
+                {% endif %}
+              </td>
+              <td class="table-actions">
+                <a href="{{ url_for('app.admin.update', user_id=user.id) }}" class="btn btn-warning btn-sm">更新</a>
+                <form action="{{ url_for('app.admin.delete', user_id=user.id) }}" method="post" style="display:inline;">
+                  <input type="hidden" name="_method" value="delete">
+                  <button type="submit" class="btn btn-danger btn-sm">削除</button>
+                </form>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <a href="{{ url_for('app.index') }}" class="btn btn-secondary btn-sm">トップページに戻る</a>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </body>
+
+</html>

@@ -22,6 +22,6 @@ def simulation():
     #         "goal_point": 0,
     #     }
     #     is_authenticated = False
-    # return render_template("simulation.html", init_data=init_data, is_authenticated=is_authenticated), 409
+    # return render_template("simulation.html", init_data=init_data, is_authenticated=is_authenticated)
 
     return redirect(url_for("app.index"))
