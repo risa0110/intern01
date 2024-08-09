@@ -27,30 +27,25 @@ COMLIST_BP = Blueprint(
 @COMLIST_BP.route("/", methods=["GET", "POST"])
 def com_list():
     products = get_json_data()["content"]
-    min_points = request.form.get("min_points", 0)
+    products_max_point = max(int(product["points"]) for product in products)
+    min_points = request.form.get("min_points", "0")
     max_points = request.form.get("max_points")
 
     if request.method == "POST":
-        try:
-            min_points = int(min_points) if min_points else None
-            max_points = int(max_points) if max_points else None
+        min_points_tmp = int(min_points) if min_points else 0
+        max_points_tmp = int(max_points) if max_points else products_max_point
 
-            if min_points is not None or max_points is not None:
-                products = filter_products_by_int(
-                    products, "points", min_points, max_points
-                )
-        except ValueError:
-            flash("無効な入力値です。数値を入力してください。", "error")
+        products = filter_products_by_int(
+            products, "points", min_points_tmp, max_points_tmp
+        )
 
     elif request.method == "GET":
         max_points_query = request.args.get("max_points")
-        if max_points_query:
-            try:
-                max_points = int(max_points_query)
-                min_points = 0
-                products = filter_products_by_int(products, "points", 0, max_points)
-            except ValueError:
-                flash("無効なクエリパラメータです。数値を入力してください。", "error")
+        max_points_tmp = (
+            int(max_points_query) if max_points_query else products_max_point
+        )
+
+        products = filter_products_by_int(products, "points", 0, max_points_tmp)
 
     products = sort_products(products)
 
